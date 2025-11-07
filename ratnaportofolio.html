@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio - Ratna</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+        :root{
+            --brand1: #f6d365;
+            --brand2: #fda085;
+            --brand-solid:#f59e0b;
+            --footer:#b45309;
+            --map-bg:#fde68a;
+        }
+        *{margin:0;padding:0;box-sizing:border-box;}
+        body{font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;line-height:1.6;color:#333;}
+        /* Navbar */
+        nav{background:linear-gradient(135deg, var(--brand1) 0%, var(--brand2) 100%);padding:1rem 5%;position:fixed;width:100%;top:0;z-index:1000;box-shadow:0 2px 10px rgba(0,0,0,0.1);}
+        .nav-container{display:flex;justify-content:space-between;align-items:center;max-width:1200px;margin:0 auto;}
+        .nav-logo{display:flex;gap:2rem;font-weight:700;}
+        .nav-logo a{color:rgba(255,255,255,.85);text-decoration:none;transition:transform .3s,opacity .2s;border-bottom:2px solid transparent;padding-bottom:2px}
+        .nav-logo a:hover{transform:translateY(-2px);opacity:1}
+        .nav-logo a.active{color:#fff;border-color:#fff}
+        .hamburger{display:flex;flex-direction:column;cursor:pointer;gap:5px}
+        .hamburger span{width:30px;height:3px;background:white;transition:.3s}
+        .nav-menu{position:fixed;right:-100%;top:0;height:100vh;width:300px;background:white;box-shadow:-2px 0 10px rgba(0,0,0,0.1);transition:.3s;padding-top:80px}
+        .nav-menu.active{right:0}
+        .nav-menu ul{list-style:none;padding:2rem}
+        .nav-menu ul li{margin:1.5rem 0}
+        .nav-menu ul li a{text-decoration:none;color:#333;font-size:1.2rem;transition:color .3s}
+        .nav-menu ul li a:hover{color:var(--brand-solid)}
+        .close-menu{position:absolute;top:20px;right:20px;font-size:2rem;cursor:pointer;color:#333}
+        /* Hero */
+        .hero{background:linear-gradient(135deg, var(--brand1) 0%, var(--brand2) 100%);color:white;padding:120px 5% 80px;text-align:center;min-height:100vh;display:flex;align-items:center;justify-content:center}
+        .hero-content{max-width:1200px;margin:0 auto}
+        .hero h1{font-size:3rem;margin-bottom:1rem;animation:fadeInUp 1s}
+        .hero p{font-size:1.3rem;margin-bottom:2rem;opacity:.9}
+        .hero-images{display:flex;justify-content:center;gap:2rem;margin-top:3rem;flex-wrap:wrap}
+        .hero-card{background:rgba(255,255,255,0.1);backdrop-filter:blur(10px);padding:2rem;border-radius:15px;width:320px;transition:transform .3s}
+        .hero-card:hover{transform:translateY(-10px)}
+        .hero-avatar{width:160px;height:160px;border-radius:50%;background:linear-gradient(135deg, rgba(255,255,255,.35) 0%, rgba(255,255,255,.15) 100%);margin:0 auto 1rem;display:flex;align-items:center;justify-content:center;font-size:3rem;color:white;border:3px solid rgba(255,255,255,.35)}
+        .hero-card h3{font-size:1.6rem;margin-bottom:.5rem}
+        .social-links{display:flex;gap:1rem;justify-content:center;margin-top:1rem}
+        .social-links a{color:white;font-size:1.5rem;transition:transform .3s}
+        .social-links a:hover{transform:scale(1.2)}
+        /* About */
+        .about{padding:80px 5%;background:#f8f9fa}
+        .section-title{text-align:center;font-size:2.5rem;margin-bottom:3rem;color:var(--brand-solid)}
+        .about-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:2rem;max-width:1200px;margin:0 auto}
+        .about-card{background:white;padding:2rem;border-radius:15px;box-shadow:0 5px 20px rgba(0,0,0,0.1);transition:transform .3s}
+        .about-card:hover{transform:translateY(-5px)}
+        .about-image{width:100%;height:250px;background:linear-gradient(135deg, rgba(0,0,0,.05) 0%, rgba(0,0,0,.02) 100%);border-radius:10px;margin-bottom:1rem;display:flex;align-items:center;justify-content:center;font-size:4rem;color:var(--brand-solid)}
+        .about-card h3{font-size:1.5rem;margin-bottom:1rem;color:var(--brand-solid)}
+        /* Experience */
+        .experience{padding:80px 5%;background:white}
+        .experience-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:2rem;max-width:1200px;margin:0 auto}
+        .experience-card{background:linear-gradient(135deg, var(--brand1) 0%, var(--brand2) 100%);color:white;padding:2rem;border-radius:15px;box-shadow:0 5px 20px rgba(0,0,0,0.1)}
+        .experience-icon{width:80px;height:80px;background:rgba(255,255,255,0.2);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:2rem;margin-bottom:1rem}
+        .experience-card h3{font-size:1.3rem;margin-bottom:.5rem}
+        .experience-card p{opacity:.95}
+        /* Contact */
+        .contact{padding:80px 5%;background:#f8f9fa}
+        .contact-container{max-width:800px;margin:0 auto;background:white;padding:3rem;border-radius:15px;box-shadow:0 5px 20px rgba(0,0,0,0.1)}
+        .contact-form{display:flex;flex-direction:column;gap:1.5rem}
+        .form-group{display:flex;flex-direction:column}
+        .form-group label{margin-bottom:.5rem;font-weight:600;color:var(--brand-solid)}
+        .form-group input,.form-group textarea{padding:.8rem;border:2px solid #e0e0e0;border-radius:8px;font-size:1rem;transition:border-color .3s}
+        .form-group input:focus,.form-group textarea:focus{outline:none;border-color:var(--brand-solid)}
+        .submit-btn{background:linear-gradient(135deg, var(--brand1) 0%, var(--brand2) 100%);color:white;padding:1rem 2rem;border:none;border-radius:8px;font-size:1.1rem;cursor:pointer;transition:transform .3s}
+        .submit-btn:hover{transform:translateY(-2px)}
+        /* Footer */
+        footer{background:var(--footer);color:white;padding:3rem 5%}
+        .footer-content{max-width:1200px;margin:0 auto;text-align:center}
+        .map-container{width:100%;height:300px;background:var(--map-bg);border-radius:15px;margin:2rem 0;display:flex;align-items:center;justify-content:center;font-size:3rem;color:white}
+        /* Animations */
+        @keyframes fadeInUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+        /* Responsive */
+        @media (max-width:768px){
+            .hero h1{font-size:2rem}
+            .hero p{font-size:1.1rem}
+            .hero-card{width:100%}
+            .nav-logo{gap:.75rem}
+            .section-title{font-size:2rem}
+        }
+
+/* === Enhancements: keep hamburger on the right & polish === */
+.nav-container{display:flex;justify-content:space-between;align-items:center}
+.nav-logo{margin-right:auto}
+.hamburger{display:flex;flex-direction:column;justify-content:center;gap:5px;cursor:pointer;transition:transform .3s}
+.hamburger:hover{transform:scale(1.08)}
+.hamburger span{width:30px;height:3px;background:white;border-radius:2px;transition:.3s}
+/* Optional: slightly dim background content when menu is open */
+.nav-menu.active{box-shadow:-4px 0 24px rgba(0,0,0,.15)}
+
+.hero-avatar img{width:160px;height:160px;border-radius:50%;object-fit:cover;border:3px solid rgba(255,255,255,.35);} 
+.experience-card img{width:100%;height:160px;object-fit:cover;border-radius:10px;margin-bottom:1rem;} 
+</style>
+</head>
+<body>
+<nav>
+  <div class="nav-container">
+    <div class="nav-logo">
+      <a href="putri.updated.html" class="">Putri</a>
+      <a href="vanessa.updated.html" class="">Vanessa</a>
+      <a href="ratna.updated.html" class="active">Ratna</a>
+    </div>
+    <div class="hamburger" onclick="toggleMenu()" role="button" aria-label="Buka menu" tabindex="0">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<div class="nav-menu" id="navMenu">
+  <span class="close-menu" onclick="toggleMenu()">&times;</span>
+  <ul>
+    <li><a href="#home" onclick="toggleMenu()">Home</a></li>
+    <li><a href="#about" onclick="toggleMenu()">About</a></li>
+    <li><a href="#experience" onclick="toggleMenu()">Pengalaman</a></li>
+    <li><a href="#contact" onclick="toggleMenu()">Contact</a></li>
+  </ul>
+</div>
+
+<section class="hero" id="home">
+  <div class="hero-content">
+    <h1>Halo, saya Ratna</h1>
+    <p>Backend Developer | Mahasiswa Sistem Informasi Universitas Musamus Merauke</p>
+    <div class="hero-images">
+      <div class="hero-card">
+        <div class="hero-avatar"><img src="https://via.placeholder.com/160x160.png?text=Ratna" alt="Foto Ratna" style="width:160px;height:160px;border-radius:50%;object-fit:cover;border:3px solid rgba(255,255,255,.35);"></div>
+        <h3>Ratna</h3>
+        <p>Backend Developer</p>
+        <div class="social-links">
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-linkedin"></i></a>
+          <a href="#"><i class="fab fa-github"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="about" id="about">
+  <h2 class="section-title">Tentang Ratna</h2>
+  <div class="about-cards">
+    <div class="about-card">
+      <div class="about-image"><img src="https://via.placeholder.com/400x250.png?text=Profil+Singkat" alt="Profil Singkat"></div>
+      <h3>Profil Singkat</h3>
+      <p>Backend Developer dengan minat pada kolaborasi tim, disiplin, dan pembelajaran berkelanjutan. Suka membangun solusi yang bermanfaat dan mudah digunakan.</p>
+    </div>
+    <div class="about-card">
+      <div class="about-image"><i class="fas fa-bolt"></i></div>
+      <h3>Keahlian Utama</h3>
+      <p>HTML, CSS, JavaScript, Git, komunikasi, problem solving, dan dokumentasi.</p>
+    </div>
+  </div>
+</section>
+
+<section class="experience" id="experience">
+  <h2 class="section-title">Pengalaman & Proyek</h2>
+  <div class="experience-grid">
+    <div class="experience-card"><img src="https://via.placeholder.com/400x160.png?text=E-Commerce" alt="E-Commerce">
+      <div class="experience-icon"><i class="fas fa-briefcase"></i></div>
+      <h3>Platform Mini E‑Commerce</h3>
+      <p>Membuat prototipe katalog, keranjang, dan checkout sederhana.</p>
+    </div>
+    <div class="experience-card"><img src="https://via.placeholder.com/400x160.png?text=Aplikasi+Mobile" alt="Aplikasi Mobile">
+      <div class="experience-icon"><i class="fas fa-mobile-alt"></i></div>
+      <h3>Desain Aplikasi Mobile</h3>
+      <p>Mendesain wireframe dan high‑fidelity mockup dengan fokus UX.</p>
+    </div>
+    <div class="experience-card"><img src="https://via.placeholder.com/400x160.png?text=Dashboard+Analytics" alt="Dashboard Analytics">
+      <div class="experience-icon"><i class="fas fa-chart-line"></i></div>
+      <h3>Dashboard Analytics</h3>
+      <p>Membangun dashboard metrik dengan update realtime simulasi.</p>
+    </div>
+  </div>
+</section>
+
+<section class="contact" id="contact">
+  <h2 class="section-title">Hubungi Ratna</h2>
+  <div class="contact-container">
+    <form class="contact-form">
+      <div class="form-group">
+        <label for="name">Nama</label>
+        <input type="text" id="name" placeholder="Masukkan nama Anda" required>
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" placeholder="Masukkan email Anda" required>
+      </div>
+      <div class="form-group">
+        <label for="message">Pesan</label>
+        <textarea id="message" rows="5" placeholder="Tuliskan pesan Anda" required></textarea>
+      </div>
+      <button type="submit" class="submit-btn">Kirim Pesan</button>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-content">
+    <h3>Lokasi</h3>
+    <div class="map-container"><i class="fas fa-map-marker-alt"></i></div>
+    <p>&copy; 2025 Ratna. All rights reserved.</p>
+    <div class="social-links" style="margin-top:1rem">
+      <a href="#"><i class="fab fa-instagram"></i></a>
+      <a href="#"><i class="fab fa-linkedin"></i></a>
+      <a href="#"><i class="fab fa-github"></i></a>
+      <a href="#"><i class="fab fa-x-twitter"></i></a>
+    </div>
+  </div>
+</footer>
+
+    <script>
+        function toggleMenu(){document.getElementById('navMenu').classList.toggle('active');}
+        document.addEventListener('click',function(e){const menu=document.getElementById('navMenu');const ham=document.querySelector('.hamburger');if(menu && ham && !menu.contains(e.target) && !ham.contains(e.target)){menu.classList.remove('active');}});
+        document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click',function(e){e.preventDefault();const t=document.querySelector(this.getAttribute('href'));if(t){t.scrollIntoView({behavior:'smooth',block:'start'});}})});
+        const form=document.querySelector('.contact-form'); if(form){form.addEventListener('submit',function(e){e.preventDefault();alert('Terima kasih! Pesan Anda telah terkirim.');this.reset();});}
+    
+// Accessibility: allow keyboard toggle on hamburger & close button
+const ham = document.querySelector('.hamburger');
+if (ham) {
+  ham.setAttribute('role','button');
+  ham.setAttribute('aria-label','Buka menu');
+  ham.setAttribute('tabindex','0');
+  ham.addEventListener('keydown', function(e){ if(e.key==='Enter' || e.key===' '){ e.preventDefault(); toggleMenu(); }});
+}
+const closeBtn = document.querySelector('.close-menu');
+if (closeBtn){
+  closeBtn.setAttribute('role','button');
+  closeBtn.setAttribute('aria-label','Tutup menu');
+  closeBtn.setAttribute('tabindex','0');
+  closeBtn.addEventListener('keydown', function(e){ if(e.key==='Enter' || e.key===' '){ e.preventDefault(); toggleMenu(); }});
+}
+
+</script>
+
+</body>
+</html>
